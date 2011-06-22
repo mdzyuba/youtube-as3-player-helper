@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright 2011 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<project name="youtube-as3-player-helper" default="main" basedir=".">
+  <property environment="env" />
+  <property file="${basedir}/build.properties.local" />
+  <property name="FLEX_HOME" location="${env.FLEX_HOME}" />
+  <property name="build" location="${basedir}/build" />
+  <property name="dist" location="${basedir}/build/dist" />
+  <property name="src" location="${basedir}/src" />
+  <property name="libraryName" value="youtube_as3_player_helper.swc" />
+
+  <fileset id="coreSrc" dir="src">
+      <include name="**/core/**/*.as" />
+  </fileset>
+
+  <fileset id="examplesSrc" dir="src">
+      <include name="**/helper/examples/**/*.as" />
+  </fileset>
+
+  <taskdef resource="flexTasks.tasks"
+           classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+
+  <target name="clean">
+    <delete dir="${dist}" />
+    <delete dir="${build}" />
+  </target>
+
+  <target name="init">
+    <mkdir dir="${build}"/>
+    <mkdir dir="${dist}"/>
+  </target>
+
+  <target name="help">
+    <java jar="${FLEX_HOME}/lib/compc.jar" fork="true" failonerror="true">
+      <arg line="-help list"/>
+    </java>
+  </target>
+
+
+
+  <target name="main" depends="init">
+    <pathconvert property="coreClasses" pathsep="," refid="coreSrc">
+      <chainedmapper>
+        <globmapper from="${basedir}/src/*" to="*"></globmapper>
+        <mapper type="package" from="*.as" to="*" />
+     </chainedmapper>
+    </pathconvert>
+
+    <compc output="${dist}/${libraryName}" include-classes="${coreClasses}">
+      <source-path path-element="${src}" />
+    </compc>
+  </target>
+
+  <macrodef name="compile-example">
+    <attribute name="class" />
+    <sequential>
+      <mxmlc
+        file="${src}/com/google/youtube/examples/helper/examples/@{class}.as"
+        output="${dist}/@{class}.swf"
+        debug="true">
+          <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+          <source-path path-element="${FLEX_HOME}/frameworks"/>
+          <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+            <include name="libs" />
+          </compiler.library-path>
+          <compiler.library-path dir="${dist}" append="true">
+            <include name="${libraryName}" />
+          </compiler.library-path>
+          <compiler.source-path path-element="${src}" />
+      </mxmlc>
+    </sequential>
+  </macrodef>
+
+  <target name="examples" depends="init">
+    <compile-example class="ChromelessPlayerExample"/>
+    <compile-example class="EmbeddedPlayerExample"/>
+    <compile-example class="mashup/VideoMashupExampleA"/>
+  </target>
+
+</project>

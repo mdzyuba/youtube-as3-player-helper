@@ -1,21 +1,22 @@
 #summary How to build youtube-as3-player-helper.
 
-* Download and unzip Flex SDK 4.5 from http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+4.5
-* Checkout project code
+  * Download and unzip [http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+4.5 Flex SDK 4.5]
+
+  * Checkout project code
 
 {{{
 $ svn checkout http://youtube-as3-player-helper.googlecode.com/svn/trunk/ youtube-as3-player-helper-read-only
 }}}
 
-* define FLEX_HOME environment variable
+  * define FLEX_HOME environment variable
 
 {{{
 $ export FLEX_HOME=/full-path-to/flex_sdk_4.5.0.20967
 }}}
 
-* Download and install [http://ant.apache.org/ Apache Ant]
+  * Download and install [http://ant.apache.org/ Apache Ant]
 
-* Build the project
+  * Build the project
 
 {{{
 $ ant 

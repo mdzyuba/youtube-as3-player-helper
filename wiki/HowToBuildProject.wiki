@@ -1,0 +1,36 @@
+#summary How to build youtube-as3-player-helper.
+
+= Introduction =
+
+* Download Flex SDK 4.5 from http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+4.5
+* Checkout project code
+
+{{{
+$ svn checkout http://youtube-as3-player-helper.googlecode.com/svn/trunk/ youtube-as3-player-helper-read-only
+}}}
+
+* define FLEX_HOME environment variable
+
+{{{
+$ export FLEX_HOME=/full-path-to/flex_sdk_4.5.0.20967
+}}}
+
+* Download and install [http://ant.apache.org/ Apache Ant]
+
+* Build the project
+
+{{{
+$ ant 
+Buildfile: youtube-as3-player-helper-read-only/build.xml
+
+init:
+    [mkdir] Created dir: youtube-as3-player-helper-read-only/build
+    [mkdir] Created dir: youtube-as3-player-helper-read-only/build/dist
+
+main:
+    [compc] Loading configuration file .../flex_sdk_4.5.0.20967/frameworks/flex-config.xml
+    [compc] youtube-as3-player-helper-read-only/build/dist/youtube_as3_player_helper.swc (7814 bytes)
+
+BUILD SUCCESSFUL
+Total time: 3 seconds
+}}}

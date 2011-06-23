@@ -14,12 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 -->
-<project name="youtube-as3-player-helper" default="main" basedir=".">
+<project name="youtube-as3-player-helper" default="all" basedir=".">
   <property environment="env" />
   <property file="${basedir}/build.properties.local" />
   <property name="FLEX_HOME" location="${env.FLEX_HOME}" />
   <property name="build" location="${basedir}/build" />
-  <property name="dist" location="${basedir}/build/dist" />
+  <property name="build.lib" location="${basedir}/build/dist" />
+  <property name="build.examples" location="${basedir}/build/examples" />
   <property name="src" location="${basedir}/src" />
   <property name="libraryName" value="youtube_as3_player_helper.swc" />
 
@@ -35,13 +36,13 @@
            classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 
   <target name="clean">
-    <delete dir="${dist}" />
     <delete dir="${build}" />
   </target>
 
   <target name="init">
     <mkdir dir="${build}"/>
-    <mkdir dir="${dist}"/>
+    <mkdir dir="${build.lib}"/>
+    <mkdir dir="${build.examples}"/>
   </target>
 
   <target name="help">
@@ -49,8 +50,6 @@
       <arg line="-help list"/>
     </java>
   </target>
-
-
 
   <target name="main" depends="init">
     <pathconvert property="coreClasses" pathsep="," refid="coreSrc">
@@ -60,7 +59,7 @@
      </chainedmapper>
     </pathconvert>
 
-    <compc output="${dist}/${libraryName}" include-classes="${coreClasses}">
+    <compc output="${build.lib}/${libraryName}" include-classes="${coreClasses}">
       <source-path path-element="${src}" />
     </compc>
   </target>
@@ -70,17 +69,18 @@
     <sequential>
       <mxmlc
         file="${src}/com/google/youtube/examples/helper/examples/@{class}.as"
-        output="${dist}/@{class}.swf"
+        output="${build.examples}/@{class}.swf"
         debug="true">
           <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
           <source-path path-element="${FLEX_HOME}/frameworks"/>
           <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
             <include name="libs" />
           </compiler.library-path>
-          <compiler.library-path dir="${dist}" append="true">
+          <compiler.library-path dir="${build.lib}" append="true">
             <include name="${libraryName}" />
           </compiler.library-path>
           <compiler.source-path path-element="${src}" />
+          <static-link-runtime-shared-libraries>true</static-link-runtime-shared-libraries>
       </mxmlc>
     </sequential>
   </macrodef>
@@ -89,6 +89,9 @@
     <compile-example class="ChromelessPlayerExample"/>
     <compile-example class="EmbeddedPlayerExample"/>
     <compile-example class="mashup/VideoMashupExampleA"/>
+    <compile-example class="mashup/VideoMashupExampleB"/>
   </target>
+
+  <target name="all" depends="init,main,examples"/>
 
 </project>

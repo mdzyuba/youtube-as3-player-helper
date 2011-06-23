@@ -73,12 +73,13 @@ package com.google.youtube.examples.helper.examples.mashup {
 
     private function updatePlayerLocation():void {
       if (this.stage && player.playerLoader.player) {
+        var playerContainer:Sprite = player.playerLoader.player;
         var x:Number = (this.stage.stageWidth -
-            player.playerLoader.player.width) / 2;
+            playerContainer.width) / 2;
         var y:Number = (this.stage.stageHeight -
-            player.playerLoader.player.height) / 2;
-        player.playerLoader.player.x = x;
-        player.playerLoader.player.y = y;
+            playerContainer.height) / 2;
+        playerContainer.x = x;
+        playerContainer.y = y;
       } else {
         trace("info", "stage is not ready yet");
       }

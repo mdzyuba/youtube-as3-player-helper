@@ -1,8 +1,6 @@
 #summary How to build youtube-as3-player-helper.
 
-= Introduction =
-
-* Download Flex SDK 4.5 from http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+4.5
+* Download and unzip Flex SDK 4.5 from http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+4.5
 * Checkout project code
 
 {{{

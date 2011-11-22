@@ -2,6 +2,8 @@
 
   * Download and unzip [http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+4.5 Flex SDK 4.5]
 
+  * Open a Terminal window
+
   * Checkout project code
 
 {{{
@@ -32,4 +34,22 @@ main:
 
 BUILD SUCCESSFUL
 Total time: 3 seconds
+}}}
+
+To run examples, simply open these files in a browser:
+{{{
+$ firefox build/examples/fullscreen/index.html
+
+$ firefox build/examples/ChromelessPlayerExample.swf 
+
+$ firefox build/examples/EmbeddedPlayerExample.swf 
+}}}
+
+On Mac, use "open" command instead of firefox:
+{{{
+$ open build/examples/fullscreen/index.html
+
+$ open build/examples/ChromelessPlayerExample.swf 
+
+$ open build/examples/EmbeddedPlayerExample.swf 
 }}}

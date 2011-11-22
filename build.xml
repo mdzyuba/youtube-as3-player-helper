@@ -90,6 +90,12 @@
     <compile-example class="EmbeddedPlayerExample"/>
     <compile-example class="mashup/VideoMashupExampleA"/>
     <compile-example class="mashup/VideoMashupExampleB"/>
+    <compile-example class="fullscreen/ChromelessPlayerFullScreenExample"/>
+    <copy todir="${build.examples}/fullscreen">
+      <fileset dir="${src}/com/google/youtube/examples/helper/examples/fullscreen">
+        <exclude name="*.as"/>
+      </fileset>
+    </copy>
   </target>
 
   <target name="all" depends="init,main,examples"/>

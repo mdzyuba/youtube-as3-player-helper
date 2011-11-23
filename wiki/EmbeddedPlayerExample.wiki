@@ -1,0 +1,5 @@
+#summary Embedded Player Example.
+
+[http://code.google.com/p/youtube-as3-player-helper/source/browse/trunk/src/com/google/youtube/examples/helper/examples/EmbeddedPlayerExample.as EmbeddedPlayerExample.as]
+
+<wiki:gadget url="https://sites.google.com/site/flexwebtools/flash-wrapper/youtube-api-example/EmbeddedPlayerExample.swf" up_swfWidth="700" up_swfHeight="440"  width="700" height="440" border="1" />

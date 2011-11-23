@@ -1,0 +1,5 @@
+#summary Examples
+
+Here is a few examples on how to use the API:
+
+  * [http://code.google.com/p/youtube-as3-player-helper/downloads/detail?name=index.html&can=2&q= Chromeless Player Full Screen Example]

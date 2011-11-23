@@ -1,0 +1,5 @@
+#summary Youtube API Examples
+
+Here is a quick example of Youtube ActionScript Player API that displays a Chromeless Player. 
+
+<wiki:gadget url="http://hosting.gmodules.com/ig/gadgets/file/115416676993110640302/FlashWrapper.xml" up_swfUrl="https://sites.google.com/site/flexwebtools/flash-wrapper/youtube-api-example/ChromelessPlayerFullScreenExample.swf" up_swfWidth="700" up_swfHeight="440"  width="700" height="440" border="1" />

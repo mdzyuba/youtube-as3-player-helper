@@ -31,12 +31,15 @@ package com.google.youtube.examples.helper.examples.fullscreen {
   import flash.geom.Rectangle;
   import flash.text.TextField;
 
+  import mx.controls.Button;
+
   [SWF(width = "640", height = "360", backgroundColor = "0xFFFFFF")]
   public class ChromelessPlayerFullScreenExample extends Sprite {
-    protected var playerLoader:PlayerLoader;
-    private var videoId:String = "bHQqvYy5KYo";
     public static const INITIAL_PLAYER_WIDTH:int = 640;
     public static const INITIAL_PLAYER_HEIGHT:int = 360;
+    protected var playerLoader:PlayerLoader;
+    private var controls:Sprite;
+    private var videoId:String = "bHQqvYy5KYo";
 
     public function ChromelessPlayerFullScreenExample() {
       setupStage();
@@ -59,11 +62,9 @@ package com.google.youtube.examples.helper.examples.fullscreen {
 
     protected function onPlayerReady(event:Event):void {
       trace("info", "PlayerExample onPlayerReady");
-      var pane:Sprite = new Sprite();
-      pane.addChild(playerLoader.player);
       addChild(playerLoader.player);
-      var fullScreenButton:Sprite = createFullScreenButtons();
-      addChild(fullScreenButton);
+      controls = createPlayerControls();
+      addChild(controls);
       playerLoader.removeEventListener(PlayerEvent.PLAYER_IS_READY,
           onPlayerReady);
       playerLoader.player.addEventListener(PlayerEvent.STATE_CHANGE,
@@ -101,6 +102,9 @@ package com.google.youtube.examples.helper.examples.fullscreen {
           playerLoader.player.x = 0;
           playerLoader.player.y = 0;
         }
+
+        controls.x = playerLoader.player.x;
+        controls.y = playerLoader.player.y + playerLoader.player.height + 5;
       } else {
         trace("info", "stage is not ready yet");
       }
@@ -110,18 +114,39 @@ package com.google.youtube.examples.helper.examples.fullscreen {
       trace("info", "error: ", event);
     }
 
-    private function createFullScreenButtons():Sprite {
-      var fullScreenButton:Sprite = new Sprite();
-      fullScreenButton.graphics.beginFill(0xFFCC00);
-      fullScreenButton.graphics.drawRect(0, 0, 60, 20);
-      fullScreenButton.graphics.endFill();
-      fullScreenButton.addEventListener(MouseEvent.CLICK, onFullButtonClick);
-      fullScreenButton.buttonMode = true;
-      fullScreenButton.mouseChildren = false;
-      var label:TextField = new TextField();
-      label.text = "Full Screen";
-      fullScreenButton.addChild(label);
-      return fullScreenButton;
+    private function createPlayerControls():Sprite {
+      var fullScreenButton:Sprite = createButton("Full Screen",
+          onFullButtonClick);
+      var pauseButton:Sprite = createButton("Pause",
+          onPauseButtonClick);
+      var playButton:Sprite = createButton("Play",
+          onPlayButtonClick);
+      var buttons:Sprite = new Sprite();
+      buttons.addChild(playButton);
+      buttons.addChild(pauseButton);
+      buttons.addChild(fullScreenButton);
+      var padding:Number = 3;
+      var width:Number = 60;
+      pauseButton.x = playButton.x + width + padding;
+      fullScreenButton.x = INITIAL_PLAYER_WIDTH - width;
+      return buttons;
+    }
+
+    private function createButton(label:String, clickHandler:Function):Sprite {
+      var width:Number = 60;
+      var height:Number = 20;
+      var color:Number = 0xEFEFEF;
+      var button:Sprite = new Sprite();
+      button.graphics.beginFill(color);
+      button.graphics.drawRect(0, 0, width, height);
+      button.graphics.endFill();
+      button.addEventListener(MouseEvent.CLICK, clickHandler);
+      button.buttonMode = true;
+      button.mouseChildren = false;
+      var textField:TextField = new TextField();
+      textField.text = label;
+      button.addChild(textField);
+      return button;
     }
 
     public function enableFullScreen():void {
@@ -150,6 +175,14 @@ package com.google.youtube.examples.helper.examples.fullscreen {
       if (!event.fullScreen) {
         playerLoader.player.setPlaybackQuality(PlaybackQuality.MEDIUM);
       }
+    }
+
+    private function onPauseButtonClick(event:Event):void {
+      playerLoader.player.pauseVideo();
+    }
+
+    private function onPlayButtonClick(event:Event):void {
+      playerLoader.player.playVideo();
     }
   }
 }

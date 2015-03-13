@@ -1,0 +1,3 @@
+Here is a quick example of a Chromeless Player with a full screen button:  [ChromelessPlayerFullScreenExample.as](http://code.google.com/p/youtube-as3-player-helper/source/browse/trunk/src/com/google/youtube/examples/helper/examples/fullscreen/ChromelessPlayerFullScreenExample.as).
+
+<wiki:gadget url="http://hosting.gmodules.com/ig/gadgets/file/115416676993110640302/FlashWrapper.xml" up\_swfUrl="https://sites.google.com/site/flexwebtools/flash-wrapper/youtube-api-example/ChromelessPlayerFullScreenExample.swf?attredirects=0" up\_swfWidth="700" up\_swfHeight="440"  width="700" height="440" border="1" />
